@@ -1,5 +1,7 @@
-// const MONGOURI = "mongodb://localhost:27017/inotebook";
-const {MONGOURI} = require('./config/keys');
+// const MONGOURI = "mongodb+srv://shrikantjha:Shri%402611@cluster0.sfjynt8.mongodb.net/NotesKeeper";
+// const MONGOURI="mongodb+srv%3A//shrikantjha%3AShri%402611@cluster0.sfjynt8.mongodb.net/test"
+
+const {MONGOURI} = require('./configs/.env')
 const mongoose = require('mongoose');
 
 

@@ -1,14 +1,18 @@
+require('dotenv').config()
 const connectToMongo = require('./db');
 const express = require('express');
 var cors = require('cors');
 
 // console.log(process.env.JWT_SECRET);
+console.log(process.env.MONGOURI)
+console.log(process.env.JWT_SECRET);
 
 connectToMongo();
 
 const app = express();
 app.use(cors())
-const {PORT} = require('./config/keys');
+const {PORT} = require('./configs/.env');
+console.log(process.env.PORT);
 
 app.use(express.json());
 //app.use ek middleware hai
@@ -37,5 +41,5 @@ app.use("/", (req, res) => {
 // }
 
 app.listen(PORT, () => {
-  console.log(`INotebook backend listening on port ${PORT}`);
+  console.log(`NotesKeeper backend listening on port ${PORT}`);
 })

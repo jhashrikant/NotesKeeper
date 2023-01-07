@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const fetchuser = require('../Middleware/fetchuser');
-const {JWT_SECRET,MONGOURI,PORT} = require('../config/keys');
+const {JWT_SECRET,MONGOURI,PORT} = require('../configs/.env');
 // require('dotenv').config({path:''});
 // console.log(process.env.JWT_SECRET)
 
