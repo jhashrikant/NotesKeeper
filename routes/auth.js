@@ -8,7 +8,8 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const fetchuser = require('../Middleware/fetchuser');
 const {JWT_SECRET,MONGOURI,PORT} = require('../config/keys');
-
+// require('dotenv').config({path:''});
+// console.log(process.env.JWT_SECRET)
 
 //below kaisa hai ki app.use('/api/auth',require('./routes/auth')); ye jo hai isme 
 //diya hai ki if api/auth hoaga to below function run kro below api

@@ -24,6 +24,9 @@ app.use('/api/notes', require('./routes/notes'));
 // })
 
 
+app.use("/", (req, res) => {
+  res.json({message:"hello from express"})
+});
 // if (process.env.NODE_ENV == 'production') {
 //   const path = require('path');
 
