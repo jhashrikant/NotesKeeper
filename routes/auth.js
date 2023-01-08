@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const User = require('../models/User');
 const { body, validationResult } = require('express-validator');
@@ -7,7 +8,8 @@ const bcrypt = require('bcrypt');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const fetchuser = require('../Middleware/fetchuser');
-const {JWT_SECRET,MONGOURI,PORT} = require('../configs/.env');
+const JWT_SECRET = process.env.JWT_SECRET || "shrikantisagoodboy"
+// const JWT_SECRET = require('../.env')
 // require('dotenv').config({path:''});
 // console.log(process.env.JWT_SECRET)
 
@@ -65,7 +67,7 @@ router.post('/createuser',
             res.json({ success,authToken });
         }
         catch (err) {
-            console.error(error.message);
+            console.error(err.message);
             res.status(500).send("Internal server error");
         }
 

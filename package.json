@@ -19,8 +19,7 @@
     "mongoose": "^6.8.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.20",
-    "dotenv": "^13.0.1"
+    "dotenv": "^13.0.1",
+    "nodemon": "^2.0.20"
   }
- 
 }

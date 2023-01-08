@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const {JWT_SECRET,MONGOURI,PORT} = require('../config/keys');
+const JWT_SECRET = "shrikantisagoodboy";
 
 
 const fetchuser = (req ,res,next) => {
