@@ -53,7 +53,7 @@ router.post('/addnote', fetchuser, [
     });
 
 
-//ROUTE 3 : UPDATE A existing NOTE USING POST api/notes/updatenote  = login rewuired for this 
+//ROUTE 3 : UPDATE A existing NOTE USING POST api/notes/updatenote  = login required for this 
 
 router.put('/updatenote/:id', fetchuser, async (req, res) => {
     const { title, description } = req.body;

@@ -1,17 +1,20 @@
-// const MONGOURI = "mongodb+srv://shrikantjha:Shri%402611@cluster0.sfjynt8.mongodb.net/NotesKeeper";
-// const MONGOURI="mongodb+srv://shrikantjha:Shri%402611@cluster0.sfjynt8.mongodb.net/test"
-// require('dotenv').config({path:'../Backend/.env'})
 require('dotenv').config();
-const MONGOURI = process.env.MONGOURI || 'mongodb://localhost:27017'
 const mongoose = require('mongoose');
+const MONGOURI = process.env.MONGOURL;
 
 
 mongoose.set('strictQuery', false);
 
-const connectToMongo =() => {
-    mongoose.connect(MONGOURI,()=>{
+const connectToMongo = async () => {
+    try {
+        await mongoose.connect(MONGOURI);
         console.log("connected to MongoDB successfully");
-    });
+    }
+    catch (error) {
+        console.log(error);
+        console.log("database connection failed")
+        process.exit(1);
+    }
 }
 
 module.exports = connectToMongo;

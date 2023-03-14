@@ -8,14 +8,14 @@ const bcrypt = require('bcrypt');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const fetchuser = require('../Middleware/fetchuser');
-const JWT_SECRET = process.env.JWT_SECRET || "shrikantisagoodboy"
-// const JWT_SECRET = require('../.env')
-// require('dotenv').config({path:''});
-// console.log(process.env.JWT_SECRET)
+const JWT_SECRET = process.env.JWT_SECRET;
+
+
+
 
 //below kaisa hai ki app.use('/api/auth',require('./routes/auth')); ye jo hai isme 
 //diya hai ki if api/auth hoaga to below function run kro below api
-//iseme ye hai ki api/auth ke bad kuch bi url ayga wo idr below api run  karvayfa
+//iseme ye hai ki api/auth ke bad kuch bi url ayga wo idr below api run  krega
 //below ye kisamko api/auth aise chode d to below run hoaga function usme dekho sirf / hai
 
 
@@ -32,13 +32,13 @@ router.post('/createuser',
 
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({success, errors: errors.array() });
+            return res.status(400).json({ success, errors: errors.array() });
         }
         //check if the user with the same email already exists//
         try {
             let user = await User.findOne({ email: req.body.email });
             if (user) {
-                return res.status(400).send({success, error:"Sorry a user with this Email already exists"});
+                return res.status(400).send({ success, error: "Sorry a user with this Email already exists" });
             }
 
             //encrypting our data in hash in database 
@@ -51,7 +51,7 @@ router.post('/createuser',
                 name: req.body.name,
                 email: req.body.email,
                 Password: securedPassword
-               
+
             });
 
             //giving token to user which contains name,email,pass to retrieve from Id 
@@ -64,7 +64,7 @@ router.post('/createuser',
             const authToken = jwt.sign(data, JWT_SECRET);
             // console.log(jwtData);//
             success = true;
-            res.json({ success,authToken });
+            res.json({ success, authToken });
         }
         catch (err) {
             console.error(err.message);
@@ -91,6 +91,7 @@ router.post('/login', [
     body('Password', 'Password Cannot be blank').exists(),
 ],
     async (req, res) => {
+
         let success = false;
         //if there aee errors return bad request
         const errors = validationResult(req);
@@ -112,7 +113,7 @@ router.post('/login', [
             const passwordCompare = await bcrypt.compare(Password, user.Password);
             if (!passwordCompare) {
                 success = false;
-                return res.status(400).json({success, error: "Please enter valid Credentials to Login" });
+                return res.status(400).json({ success, error: "Please enter valid Credentials to Login" });
             }
             //sending auth token 
             const data = {
@@ -123,7 +124,7 @@ router.post('/login', [
             const authToken = jwt.sign(data, JWT_SECRET);
             // console.log(jwtData);//
             success = true;
-            res.json({ success,authToken });
+            res.json({ success, authToken });
         }
         catch (error) {
             console.error(error.message);
@@ -133,7 +134,7 @@ router.post('/login', [
 
 
 //ROUTE 3 : gET logged in user details using POST /api/auth/getUser (Login required)
-router.post('/getUser',fetchuser,
+router.post('/getUser', fetchuser,
 
     async (req, res) => {
         try {
@@ -146,8 +147,8 @@ router.post('/getUser',fetchuser,
             res.status(500).send("Internal server error");
 
         }
-        
+
     });
 
-    
+
 module.exports = router;
